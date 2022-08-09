@@ -1,9 +1,9 @@
 {
-    "version": "0.2.0.0",
+    "version": "0.2.1.0",
     "name": "Podcast RSS Maker",
     "category_name": "service",
-    "developer": "soju6jan",
+    "developer": "soju6jan, 수정 tuoway ",
     "description": "Podcast 지원",
-    "home": "https://github.com/soju6jan/podcast_feed_maker",
+    "home": "https://github.com/tuoway/podcast_rss_maker",
     "more": ""
 }
