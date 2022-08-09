@@ -50,15 +50,15 @@ class LogicGoogle(LogicModuleBase):
             image = req.args.get('image') if req.args.get('image') is not None else ''
             desc = req.args.get('desc') if req.args.get('desc') is not None else ''
             genre = req.args.get('genre') if req.args.get('genre') is not None else ''
-            return self.make_xml(remote, title, image, desc, genre)
+            return self.make_xml(remote, title, googleapi, image, desc, genre)
         except Exception as e: 
             logger.error('Exception:%s', e)
             logger.error(traceback.format_exc())
 
 
-    def make_xml(self, remote, title, image, desc, genre):
+    def make_xml(self, remote, title, googleapi, image, desc, genre):
         try:
-            logger.debug('%s %s %s %s %s', remote, title, image, desc, genre)
+            logger.debug('%s %s %s %s %s', remote, title, googleapi, image, desc, genre)
             tmp = builder.ElementMaker(nsmap={'itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'})
             root = tmp.rss(version="2.0")
             EE = builder.ElementMaker(namespace="http://www.itunes.com/dtds/podcast-1.0.dtd", nsmap={'itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'})
