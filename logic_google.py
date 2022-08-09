@@ -93,7 +93,7 @@ class LogicGoogle(LogicModuleBase):
                     E.pubDate(startdate.strftime('%a, %d %b %Y %H:%M:%S') + ' +0900'),
                     EE.duration(),
                     #E.enclosure(url='https://drive.google.com/uc?export=download&id={}'.format(item['ID']), length=str(item['Size']), type=item['MimeType']),
-                    E.enclosure(url='https://www.googleapis.com/drive/v3/files/{0}?alt=media&key={1}'.format(item['ID'],gooleapi), length=str(item['Size']), type='audio/mp3'),
+                    E.enclosure(url='https://www.googleapis.com/drive/v3/files/{0}?alt=media&key={1}'.format(item['ID'],googleapi), length=str(item['Size']), type='audio/mp3'),
                     #E.description(item['Name'])
                 ))
                 startdate = startdate + timedelta(days=1)
