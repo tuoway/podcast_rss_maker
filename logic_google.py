@@ -35,7 +35,7 @@ class LogicGoogle(LogicModuleBase):
     def process_menu(self, sub, req):
         arg = P.ModelSetting.to_dict()
         if sub == 'setting':
-            arg['sample'] = '%s/%s/api/google/rss?remote=[구글리모트]&title=[제목]&desc=&image=&genre=' % (SystemModelSetting.get('ddns'), package_name)
+            arg['sample'] = '%s/%s/api/google/rss?remote=[구글리모트]&title=[제목]&googleapi=[구글api]desc=&image=&genre=' % (SystemModelSetting.get('ddns'), package_name)
             if SystemModelSetting.get_bool('auth_use_apikey'):
                 arg['sample'] += '&apikey=%s' % SystemModelSetting.get('auth_apikey')
             return render_template('{package_name}_{module_name}_{sub}.html'.format(package_name=P.package_name, module_name=self.name, sub=sub), arg=arg)
@@ -46,6 +46,7 @@ class LogicGoogle(LogicModuleBase):
         try:
             remote = req.args.get('remote')
             title = req.args.get('title')
+            googleapi = req.args.get('googleapi')
             image = req.args.get('image') if req.args.get('image') is not None else ''
             desc = req.args.get('desc') if req.args.get('desc') is not None else ''
             genre = req.args.get('genre') if req.args.get('genre') is not None else ''
@@ -92,7 +93,7 @@ class LogicGoogle(LogicModuleBase):
                     E.pubDate(startdate.strftime('%a, %d %b %Y %H:%M:%S') + ' +0900'),
                     EE.duration(),
                     #E.enclosure(url='https://drive.google.com/uc?export=download&id={}'.format(item['ID']), length=str(item['Size']), type=item['MimeType']),
-                    E.enclosure(url='https://drive.google.com/uc?export=download&id={}'.format(item['ID']), length=str(item['Size']), type='audio/mp3'),
+                    E.enclosure(url='https://www.googleapis.com/drive/v3/files/{0}?alt=media&key={1}'.format(item['ID'],gooleapikey), length=str(item['Size']), type='audio/mp3'),
                     #E.description(item['Name'])
                 ))
                 startdate = startdate + timedelta(days=1)
