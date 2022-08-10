@@ -81,7 +81,7 @@ class LogicGoogle(LogicModuleBase):
             import rclone 
             lsjson = RcloneTool2.lsjson(rclone.Logic.path_rclone, rclone.Logic.path_config, remote, option=['-R', '--files-only'])
             startdate= datetime.now() + timedelta(days=len(lsjson)*-1)
-            for item in list(reversed(lsjson)):
+            for item in list(lsjson):
                 #logger.debug(item)
                 if not item['MimeType'].startswith('audio'):
                     continue
